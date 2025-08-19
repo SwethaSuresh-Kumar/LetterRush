@@ -1,0 +1,29 @@
+<p>game-lobby works!</p>
+
+<div class="wrapper">
+  <h2>Available Rooms</h2>
+
+  @if (rooms.length === 0) {
+   
+      <p>No rooms available. Create a new room!</p>
+  } @else {
+    <ul>
+    @for (room of rooms; track $index) {
+      <li>
+        <div class="room-wrapper">
+          <div class="room-content">
+            <h3>{{ room.roomId }}</h3>
+            <p>Players: {{ room.players.length }}</p>
+          </div>
+          <button (click)="joinRoom(room.roomId)">Join Room</button>
+        </div>
+      </li>
+    }
+    </ul>
+  }
+<button (click)="createRoom()"> + Create New Room</button>
+</div>
+
+
+
+

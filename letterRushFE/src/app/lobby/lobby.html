@@ -1,0 +1,9 @@
+<h1>LetterRush</h1>
+
+<p>Welcome to the LetterRush game lobby!</p>
+
+<p>Join the Race!</p>
+
+<input type="text" [(ngModel)]="username" placeholder="Enter your name" />
+
+<button class="btn" (click)="navigateTo('join-game',username)">Let's Race!</button>

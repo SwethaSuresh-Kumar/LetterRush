@@ -1,0 +1,68 @@
+<div class="game-container">
+
+  <!-- Join Room -->
+  <div *ngIf="!gameStarted && roomId">
+    <!-- <p>{{room.id}}</p> -->
+    <h2>Room ID: {{ roomData.roomId }}</h2>
+
+    @if (roomData.players.length>0) {
+      <h3>Players in Room:</h3>
+      <ul>
+        @for (player of roomData.players; track player.name) {
+          <li>{{ player.name }}</li>
+        }
+      </ul>
+    } @else {
+      <p>No players in this room yet.</p>
+    }
+
+    <button (click)="startGame()">Start Game</button>
+  </div>
+
+
+  <!-- Countdown -->
+  <div *ngIf="countdown !== null">
+    <h2>Game starting in: {{ countdown }}</h2>
+  </div>
+
+  <!-- Game Started -->
+  <div *ngIf="gameStarted">
+    <h2>Typing Game</h2>
+    <p class="game-text">{{ text }}</p>
+    <textarea          
+      [(ngModel)]="typedText"
+      (input)="onTyping()"
+      rows="5"
+      placeholder="Start typing here..."
+    ></textarea>
+  </div>
+
+  <!-- Leaderboard -->
+  <div *ngIf="players.length > 0">
+    <h3>Leaderboard</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Player</th>
+          <th>WPM</th>
+          <th>Completion (%)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let player of players">
+          <td>{{ player.name }}</td>
+          <td>{{ player.wpm }}</td>
+          <td>{{ player.completion | number: '1.0-0' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Game Over -->
+  <div *ngIf="gameOver">
+    <h2>Game Over!</h2>
+    <h3>Winner: {{ players[0].name }}</h3>
+    <button (click)="roomId = ''; gameOver = false;">Back to Lobby</button>
+  </div>
+
+</div>

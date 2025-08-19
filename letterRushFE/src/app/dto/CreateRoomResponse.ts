@@ -1,0 +1,3 @@
+interface CreateRoomResponse {
+  roomId: string;
+}
