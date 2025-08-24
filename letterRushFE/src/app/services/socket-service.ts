@@ -4,17 +4,18 @@ import { io, Socket } from 'socket.io-client';
 import { GameOverData } from '../dto/GameOverData';
 import { Player } from '../dto/Player';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment.prod';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class SocketService {
   socket: Socket;
-  private baseURL = 'http://localhost:5000';
   arr:Player[]=[];
-
+private baseUrl = environment.apiUrl;
   constructor(private http: HttpClient) {
-    this.socket = io(this.baseURL, { transports: ['websocket', 'polling'] });
+    this.socket = io(this.baseUrl, { transports: ['websocket', 'polling'] });
 
     this.socket.on('connect', () => console.log('Connected to server'));
     this.socket.on('disconnect', () => console.log('Disconnected from server'));
@@ -22,7 +23,7 @@ export class SocketService {
 
   getRooms(): Observable<any[]> {
     return this.http
-      .get<{ rooms: any[] }>(`${this.baseURL}/rooms`)
+      .get<{ rooms: any[] }>(`${this.baseUrl}/rooms`)
       .pipe(map((res: { rooms: any }) => res.rooms));
   }
 
@@ -93,7 +94,7 @@ sendProgress(roomId: string, progress: Player) {
 
 
   getRoomById(roomId: string): Observable<any> {
-    return this.http.get<any>(`${this.baseURL}/getRoom/${roomId}`);
+    return this.http.get<any>(`${this.baseUrl}/getRoom/${roomId}`);
   }
 
 
