@@ -16,5 +16,8 @@
     "mongoose": "^8.17.2",
     "nanoid": "^5.1.5",
     "socket.io": "^4.8.1"
+  },
+  "devDependencies": {
+    "mongodb-memory-server": "^10.2.0"
   }
 }
