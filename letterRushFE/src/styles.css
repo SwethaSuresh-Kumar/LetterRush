@@ -1,1 +1,175 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global resets & variables */
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Indie+Flower&display=swap');
+
+:root {
+  --main-bg:  radial-gradient(circle, rgba(107, 211, 255, 1) 0%, rgba(191, 242, 212, 1) 50%, rgba(255, 244, 143, 1) 100%);
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --accent: #4c6ef5;
+  --text: #1e1e1e;
+  --shadow: rgba(0, 0, 0, 0.15);
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-family: "Indie Flower", cursive;
+  font-weight: 700;
+  /* letter-spacing: 2PX; */
+}
+body {
+  width: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text);
+  background: var(--main-bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+
+.lobby{
+display: flex;
+width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 65vh;
+}
+/* Common button style */
+.btn {
+  display: block;
+  margin-top: 1rem;
+  width: 100%;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.btn:hover {
+  background: #3b5bdb;
+  transform: translateY(-2px);
+}
+
+.roomID{
+  color: #1e1e1e;
+  letter-spacing: 0.2rem;
+  font-weight: 200;
+  font-family: "Bangers", system-ui;
+  font-style: normal;
+}
+/* Lobby list layout */
+.wrapper {
+  background: var(--card-bg);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px var(--shadow);
+  padding: 2rem;
+  width: 100%;
+  max-width: 45rem;
+  margin: 1rem 0;
+  display: flex;
+   flex-direction: column;
+  align-items: center;
+}
+
+.logo{
+  font-family: "Bangers", system-ui;
+  font-style: normal;
+  color: #4a6fa5;
+  width: auto;
+}
+.logo-clr2{
+  font-family: "Bangers", system-ui;
+  font-style: normal;
+  color: #1a2e35;
+}
+
+input[type=text]{
+  width: 100%;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+.wrapper h2 {
+  margin-bottom: 1rem;
+  color: var(--accent);
+}
+.wrapper ul {
+  list-style: none;
+}
+.room-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem;
+  margin-bottom: 0.5rem;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px var(--shadow);
+}
+.room-wrapper h3 {
+  font-size: 1.1rem;
+  color: var(--text);
+}
+.room-wrapper p {
+  font-size: 0.9rem;
+  color: #555;
+}
+.room-wrapper .btn {
+  padding: 0.4rem 0.8rem;
+}
+
+/* Game container & text styling */
+.game-container {
+  background: var(--card-bg);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px var(--shadow);
+  /* max-width: 600px; */
+  width: 100%;
+  padding: 2rem;
+  margin: 1rem auto;
+}
+.game-text {
+  /* font-size: 1.2rem; */
+  /* line-height: 1.5; */
+  word-wrap: break-word;
+  padding: 1rem;
+  background: #f9f9f9;
+  border-radius: 4px;
+}
+
+.correct {
+  background-color: #2f9e44;
+  width: 1px;
+}
+.incorrect {
+  background-color: #e03131;
+  width: 1px;
+}
+
+/* Leaderboard table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+}
+thead {
+  background: var(--accent);
+  color: #fff;
+}
+th, td {
+  text-align: left;
+  padding: 0.6rem;
+}
+tbody tr:nth-child(odd) {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+/* Countdown & headers */
+h2, h3 {
+  color: var(--accent);
+}

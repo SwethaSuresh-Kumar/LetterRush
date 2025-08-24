@@ -1,0 +1,20 @@
+.correct {
+ background-color: #2f9e44; /* green */
+  font-weight: bold;
+}
+
+.wrong {
+  background-color: #e03131; /* red */
+  font-weight: bold;
+}
+
+.game-text span {
+  display: inline;   /* ensures normal text flow */
+  width: auto;       /* no spacing issues */
+}
+
+.game-text {
+  /* font-size: 18px; */
+  margin-bottom: 10px;
+  white-space: pre-wrap;
+}

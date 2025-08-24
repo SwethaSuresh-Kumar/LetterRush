@@ -1,3 +1,0 @@
-interface CreateRoomResponse {
-  roomId: string;
-}

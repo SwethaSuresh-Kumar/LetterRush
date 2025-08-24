@@ -1,8 +1,8 @@
-import { PlayerProgress } from "../dto/PlayerProgress";
+import { Player } from "../dto/Player";
 
 export class Room{
     roomId: string= '';
-    players: PlayerProgress[]= [];
+    players: Player[]= [];
     gameStarted: boolean= false;
     gameOver: boolean= false;
 }

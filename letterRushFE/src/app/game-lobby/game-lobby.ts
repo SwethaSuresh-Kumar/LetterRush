@@ -52,7 +52,7 @@ export class GameLobby {
 
   navigateToGame() {
     this.router.navigate(['game'], {
-      queryParams: { roomId: this.roomId},
+      queryParams: { roomId: this.roomId, username: this.username },
     });
   }
   

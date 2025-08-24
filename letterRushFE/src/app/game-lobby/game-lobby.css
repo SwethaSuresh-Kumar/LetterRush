@@ -1,0 +1,37 @@
+.wrapper{
+    width: 70%;
+    margin: auto;
+}
+.join-btn{
+    background-color: #4c6ef5;
+    color: #fafafa;
+    border: #4c6ef5;
+    padding: 0.5rem;
+}
+.join-btn:hover {
+  background: #3b5bdb;
+  transform: translateY(-2px);
+}
+
+.roomID{
+  font-family: "Bangers", system-ui;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.create-btn{
+    background-color: #ffff;
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    border: 1px dashed #3b5bdb;
+    color: #3b5bdb;
+}
+
+@media screen and (max-width:460px) {
+  .room-wrapper{
+    display: flex;
+    flex-direction: column;
+  }
+  
+}

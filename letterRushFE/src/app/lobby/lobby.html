@@ -1,9 +1,15 @@
-<h1>LetterRush</h1>
+<section class="lobby">
+  <h1 class="logo">Letter<span class="logo-clr2">Rush</span></h1>
 
-<p>Welcome to the LetterRush game lobby!</p>
+  <div class="wrapper">
+    <p>Welcome to the LetterRush game lobby!</p>
 
-<p>Join the Race!</p>
+    <p>Join the Race!</p>
 
-<input type="text" [(ngModel)]="username" placeholder="Enter your name" />
+    <input type="text" [(ngModel)]="username" placeholder="Enter your name" />
 
-<button class="btn" (click)="navigateTo('join-game',username)">Let's Race!</button>
+    <button class="btn" (click)="navigateTo('join-game',username)">
+      Let's Race!
+    </button>
+  </div>
+</section>

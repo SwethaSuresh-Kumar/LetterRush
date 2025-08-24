@@ -1,6 +1,6 @@
-import { PlayerProgress } from "./PlayerProgress";
+import { Player} from "./Player";
 
 export interface GameOverData {
-   winner: PlayerProgress;
-  results: PlayerProgress[]; 
+   winner: Player;
+  results: Player[]; 
 }
