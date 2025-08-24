@@ -8,7 +8,7 @@ const { nanoid } = require("nanoid");
 const app = express();
 app.use(
   cors({
-    origin: ["http://localhost:4200"],
+    origin: ["https://lrush.netlify.app/"],
     methods: ["GET", "POST"],
     credentials: false,
   })
