@@ -106,6 +106,10 @@ async function startServer() {
       room.players = room.players.filter((p) => p.socketId !== socket.id);
       await room.save();
       io.to(roomId).emit("playerLeft", room.players);
+      if (room.players.length === 0) {
+    await Room.deleteOne({ _id: room._id });
+    io.emit("roomDeleted", roomId);
+  }
     });
 
     socket.on("startGame", async (roomId) => {

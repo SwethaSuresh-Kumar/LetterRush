@@ -26,7 +26,7 @@ export class GameComponent {
   constructor(
     private socketService: SocketService,
     private route: ActivatedRoute,
-    private router:Router
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -38,7 +38,8 @@ export class GameComponent {
         console.log(room);
       });
     });
-      this.socketService.onGameOver().subscribe((data) => {
+
+    this.socketService.onGameOver().subscribe((data) => {
       this.winner = data.winner;
       alert(`🎉 Game Over! Winner: ${data.winner.name}`);
       this.gameStarted = false;
@@ -51,8 +52,8 @@ export class GameComponent {
       this.countdown = null;
     });
     this.socketService.onPlayerUpdate().subscribe((players: Player[]) => {
-        this.players = players;
-      });
+      this.players = players;
+    });
     this.socketService.onPlayerJoined().subscribe((players) => {
       this.players = players;
     });
@@ -62,51 +63,57 @@ export class GameComponent {
     if (this.roomId) this.socketService.startGame(this.roomId);
   }
 
-calculateWPM(typedText: string, referenceText: string, elapsedMinutes: number): number {
-  let correctChars = 0;
-  for (let i = 0; i < typedText.length && i < referenceText.length; i++) {
-    if (typedText[i] === referenceText[i]) {
-      correctChars++;
-    } else {
-      break;
+  calculateWPM(
+    typedText: string,
+    referenceText: string,
+    elapsedMinutes: number
+  ): number {
+    let correctChars = 0;
+    for (let i = 0; i < typedText.length && i < referenceText.length; i++) {
+      if (typedText[i] === referenceText[i]) {
+        correctChars++;
+      } else {
+        break;
+      }
     }
+    const wordsTyped = correctChars / 5;
+    return Math.max(0, Math.round(wordsTyped / elapsedMinutes));
   }
-  const wordsTyped = correctChars / 5;
-  return Math.max(0, Math.round(wordsTyped / elapsedMinutes));
-}
 
-calculateCompletion(typedText: string, referenceText: string): number {
-  let correctChars = 0;
-  for (let i = 0; i < typedText.length && i < referenceText.length; i++) {
-    if (typedText[i] === referenceText[i]) {
-      correctChars++;
-    } else {
-      break;
+  calculateCompletion(typedText: string, referenceText: string): number {
+    let correctChars = 0;
+    for (let i = 0; i < typedText.length && i < referenceText.length; i++) {
+      if (typedText[i] === referenceText[i]) {
+        correctChars++;
+      } else {
+        break;
+      }
     }
+    return Math.min(
+      Math.round((correctChars / referenceText.length) * 100),
+      100
+    );
   }
-  return Math.min(Math.round((correctChars / referenceText.length) * 100), 100);
-}
 
-
-onTyping() {
-  if (!this.startTime) this.startTime = Date.now();
-  console.log(this.players);
-  const elapsedMinutes = (Date.now() - this.startTime) / 60000;
-  const wpm = this.calculateWPM(this.typedText, this.text, elapsedMinutes);
-  const completion = this.calculateCompletion(this.typedText, this.text);
-  if (completion >= 100) {
-    this.socketService.playerFinished(this.roomId, wpm, completion);
-    this.gameOver = true;
+  onTyping() {
+    if (!this.startTime) this.startTime = Date.now();
+    console.log(this.players);
+    const elapsedMinutes = (Date.now() - this.startTime) / 60000;
+    const wpm = this.calculateWPM(this.typedText, this.text, elapsedMinutes);
+    const completion = this.calculateCompletion(this.typedText, this.text);
+    if (completion >= 100) {
+      this.socketService.playerFinished(this.roomId, wpm, completion);
+      this.gameOver = true;
+    }
+    this.socketService.sendProgress(this.roomId, {
+      name: this.username,
+      wpm,
+      completion,
+    });
+    this.socketService.onPlayerUpdate().subscribe((players) => {
+      this.players = players;
+    });
   }
-  this.socketService.sendProgress(this.roomId, {
-    name: this.username,
-    wpm,
-    completion
-  });
-     this.socketService.onPlayerUpdate().subscribe((players) => {
-    this.players = players;
-  });
-}
 
   getHighlightedText() {
     let result = '';
@@ -125,8 +132,8 @@ onTyping() {
     return result;
   }
 
-  navigateTo(route:string){
-    this.text='';
+  navigateTo(route: string) {
+    this.text = '';
     this.socketService.onLeaveRoom(this.roomId);
     this.router.navigate([route]);
   }

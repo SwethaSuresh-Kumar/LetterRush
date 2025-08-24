@@ -91,7 +91,13 @@ sendProgress(roomId: string, progress: Player) {
   console.log(`Sending progress for room ${roomId}:`, progress);
   this.socket.emit('playerProgress', { roomId, progress });
 }
-
+ onRoomDeleted(): Observable<string> {
+    return new Observable((subscriber) => {
+      this.socket.on('roomDeleted', (roomId: string) => {
+        subscriber.next(roomId);
+      });
+    });
+  }
 
   getRoomById(roomId: string): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/getRoom/${roomId}`);
