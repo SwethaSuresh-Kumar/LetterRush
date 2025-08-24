@@ -8,7 +8,7 @@ const { nanoid } = require("nanoid");
 const app = express();
 app.use(
   cors({
-    origin: ["https://lrush.netlify.app/"],
+    origin: ["https://lrush.netlify.app"],
     methods: ["GET", "POST"],
     credentials: false,
   })
@@ -40,7 +40,7 @@ app.get("/getRoom/:roomId", async (req, res) => {
 
 const server = http.createServer(app);
 const io = new Server(server, {
-  cors: { origin: ["http://localhost:4200"], methods: ["GET", "POST"] },
+  cors: { origin: ["https://lrush.netlify.app"], methods: ["GET", "POST"] },
 });
 
 io.on("connection", (socket) => {
@@ -87,15 +87,6 @@ io.on("connection", (socket) => {
     io.to(roomId).emit("playerLeft", room.players);
   });
 
-  socket.on("disconnect", async () => {
-    const rooms = await Room.find({ "players.socketId": socket.id });
-    for (const room of rooms) {
-      room.players = room.players.filter((p) => p.socketId !== socket.id);
-      await room.save();
-      io.to(room.roomId).emit("playerLeft", room.players);
-    }
-    console.log("❌ disconnected:", socket.id);
-  });
 
   socket.on("startGame", async (roomId) => {
     const room = await Room.findOne({ roomId });
@@ -188,7 +179,7 @@ let counter = 3;
 const mongoose = require("mongoose");
 const playerSchema = require("./model/Room");
 mongoose
-  .connect("mongodb+srv://swethasureshkumarsk:<db_password>@applicationscluster.vb2gxok.mongodb.net/?retryWrites=true&w=majority&appName=ApplicationsCluster/letter-rush", {
+  .connect("mongodb+srv://swethasureshssk14:oD6jhpnoACHbskxq@cluster01.boommiz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster01/letter-rush", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
